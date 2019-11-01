@@ -8,7 +8,11 @@ const Name = props => {
     setDarkMode(!darkMode);
   };
 
-  return <h1 onClick={toggle}>Name: {props.name}</h1>;
+  return (
+    <h1 data-testid="h1-click" onClick={toggle}>
+      Name: {props.name}
+    </h1>
+  );
 };
 
 export default Name;
