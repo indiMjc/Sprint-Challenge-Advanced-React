@@ -1,13 +1,14 @@
 import React from "react";
 import axios from "axios";
+import Name from "./Name";
 
 class Card extends React.Component {
   state = {
     fetchedData: []
   };
 
-  async componentDidMount() {
-    await axios
+  componentDidMount() {
+    axios
       .get("http://localhost:5000/api/players")
       .then(res => {
         console.log(res);
@@ -21,7 +22,6 @@ class Card extends React.Component {
   }
 
   render() {
-    console.log(this.state.data);
     if (!this.state.data) {
       return <h1>Loading...</h1>;
     }
@@ -29,7 +29,7 @@ class Card extends React.Component {
       <>
         {this.state.data.map((person, i) => (
           <>
-            <h1 key={person.name}>Name: {person.name}</h1>
+            <Name key={person.name} name={person.name} />
             <h2 key={i}>Country: {person.country}</h2>
             <h3 key={Date.now()}>Searches: {person.searches}</h3>
           </>
