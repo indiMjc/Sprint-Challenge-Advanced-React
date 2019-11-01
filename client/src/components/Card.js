@@ -6,12 +6,34 @@ class Card extends React.Component {
     fetchedData: []
   };
 
+  async componentDidMount() {
+    await axios
+      .get("http://localhost:5000/api/players")
+      .then(res => {
+        console.log(res);
+        this.setState({
+          data: res.data
+        });
+      })
+      .catch(err => {
+        console.log("the data was not returned", err);
+      });
+  }
+
   render() {
+    console.log(this.state.data);
+    if (!this.state.data) {
+      return <h1>Loading...</h1>;
+    }
     return (
       <>
-        <h1>name</h1>
-        <h2>country</h2>
-        <h3>searches</h3>
+        {this.state.data.map((person, i) => (
+          <>
+            <h1 key={person.name}>Name: {person.name}</h1>
+            <h2 key={i}>Country: {person.country}</h2>
+            <h3 key={Date.now()}>Searches: {person.searches}</h3>
+          </>
+        ))}
       </>
     );
   }
