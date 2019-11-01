@@ -1,7 +1,14 @@
 import React from "react";
+import { useToggleClass } from "../hooks/classtoggleHook";
 
 const Name = props => {
-  return <h1>Name: {props.name}</h1>;
+  const [darkMode, setDarkMode] = useToggleClass(false);
+  const toggle = e => {
+    e.preventDefault();
+    setDarkMode(!darkMode);
+  };
+
+  return <h1 onClick={toggle}>Name: {props.name}</h1>;
 };
 
 export default Name;
